@@ -1,0 +1,28 @@
+Para la instalación del componente escribimos lo siguiente en el terminal
+
+composer require barryvdh/laravel-dompdf
+
+Configurar config/app.php
+
+
+
+return [
+    'providers' => [
+        Barryvdh\DomPDF\ServiceProvider::class,
+    ],
+
+    'aliases' => [
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+    ],
+];
+
+
+Agregar al control
+
+use Barryvdh\DomPDF\Facade as PDF;
+
+function metodo(){
+	$pdf = PDF::loadView("load.pdfGpo",compact());
+    $pdf->setPaper("letter","portrait");
+    return $pdf->stream();
+}
